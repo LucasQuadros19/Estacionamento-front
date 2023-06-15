@@ -7,11 +7,17 @@ export class CondutorClient {
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8080/api/condutor",
+      baseURL: "http://localhost:8081/api/condutor",
       headers: { "Content-type": "application/json" },
     });
   }
-
+  public async findByAll(): Promise<Condutor> {
+    try {
+      return (await this.axiosClient.get<Condutor>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
   public async findById(id: number): Promise<Condutor> {
     try {
       return (await this.axiosClient.get<Condutor>(`/${id}`)).data;

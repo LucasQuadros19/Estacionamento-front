@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+<Headers/>
 </template>
 
-<script lang="ts">
+<script>
 import { Options, Vue } from 'vue-class-component';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Anuncio from '../components/Anuncio.vue';
+import Headers from '../components/Header.vue'
+
 
 @Options({
   components: {
     HelloWorld,
+     components:{
+       Anuncio,
+       Headers,
+       
+
+     }
   },
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  isDarkTheme = false;
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
+}
 </script>
+
+<style lang="scss">
+</style>
