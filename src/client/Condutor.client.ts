@@ -20,7 +20,7 @@ export class CondutorClient {
   }
   public async findById(id: number): Promise<Condutor> {
     try {
-      return (await this.axiosClient.get<Condutor>(`/${id}`)).data;
+      return (await this.axiosClient.get<Condutor>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }

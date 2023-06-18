@@ -3,7 +3,7 @@
     <h2>Lista de Condutores</h2>
     <ul>
       <li v-for="condutor in condutores" :key="condutor.id">
-        ID: {{ condutor.id }}<br>
+        <h1 class="core"> ID: {{ condutor.id }}</h1><br>
         Cadastro: {{ condutor.cadastro }}<br>
         Edição: {{ condutor.edicao }}<br>
         Ativo: {{ condutor.ativo }}<br>
@@ -40,3 +40,10 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped lang="scss">
+.core{
+  color: red;
+}
+
+</style>
+
