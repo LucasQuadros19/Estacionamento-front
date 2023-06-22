@@ -1,42 +1,37 @@
 <template>
   <div class="d-flex justify-content-center align-items-center">
     <div class="rectangle">
-
-
-      <h2>Lista de Condutores</h2>
-      <router-link class="nav-link" to="/cadastro">
-      <button type="button" class="btn  btn-secondary">cadastrar</button> 
-      </router-link>
-
-
+      <h2>Lista de Veículos</h2>
+      <button type="button" class="btn btn-secondary">cadastrar</button>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Telefone</th>
-            <th>Ativo</th>
             <th>Cadastro</th>
             <th>Edição</th>
+            <th>Ativo</th>
+            <th>Placa</th>
+            <th>Ano</th>
+            <th>Tipo</th>
+            <th>Cor</th>
+            <th>Modelo</th>
+            <th>Marca</th>
             <th>opcoes</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="condutor in condutores" :key="condutor.id">
-            <td>{{ condutor.id }}</td>
-            <td>{{ condutor.nome }}</td>
-            <td>{{ condutor.cpf }}</td>
-            <td>{{ condutor.telefone }}</td>
-
+          <tr v-for="veiculo in veiculos" :key="veiculo.id">
+            <td>{{ veiculo.id }}</td>
+            <td>{{ veiculo.cadastro }}</td>
+            <td>{{ veiculo.edicao }}</td>
             <td
               :class="{
-                'text-success': condutor.ativo,
-                'text-danger': !condutor.ativo,
+                'text-success': veiculo.ativo,
+                'text-danger': !veiculo.ativo,
               }"
             >
               <svg
-                v-if="condutor.ativo"
+                v-if="veiculo.ativo"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -62,9 +57,11 @@
                 />
               </svg>
             </td>
+            <td>{{ veiculo.placa }}</td>
+            <td>{{ veiculo.ano }}</td>
+            <td>{{ veiculo.tipo }}</td>
+            <td>{{ veiculo.cor }}</td>
 
-            <td>{{ condutor.cadastro }}</td>
-            <td>{{ condutor.edicao }}</td>
             <td>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,9 +88,6 @@
                   d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
                 />
               </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-binoculars" viewBox="0 0 16 16">
-  <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V2.5zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5h-1zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V4zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V3zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14z"/>
-</svg>
             </td>
           </tr>
         </tbody>
@@ -101,35 +95,29 @@
     </div>
   </div>
 </template>
-
-<script >
+<script>
 import { defineComponent } from "vue";
-import { CondutorClient } from "../client/Condutor.client";
+import { VeiculoClient } from "../client/Veiculos.client";
 
 export default defineComponent({
   data() {
     return {
-      condutores: [],
+      veiculos: [],
     };
   },
   mounted() {
-    this.carregarCondutores();
+    this.carregarVeiculos();
   },
   methods: {
-    async carregarCondutores() {
+    async carregarVeiculos() {
       try {
-        const client = new CondutorClient();
-        this.condutores = await client.findByAll();
+        const client = new VeiculoClient();
+        //     this.veiculos = await client.findByAll();
       } catch (error) {
-        console.error("Erro ao carregar os condutores:", error);
+        console.error("Erro ao carregar os veículos:", error);
       }
     },
   },
 });
 </script>
-
-<style scoped>
-.bi{
-  color: #1cff7a;
-}
-</style>
+<style scoped></style>

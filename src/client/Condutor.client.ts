@@ -11,13 +11,14 @@ export class CondutorClient {
       headers: { "Content-type": "application/json" },
     });
   }
-  public async findByAll(): Promise<Condutor> {
+  public async findByAll(): Promise<Condutor[]> {
     try {
-      return (await this.axiosClient.get<Condutor>(`/lista`)).data;
+      return (await this.axiosClient.get<Condutor[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
+  
   public async findById(id: number): Promise<Condutor> {
     try {
       return (await this.axiosClient.get<Condutor>(`/lista/id/${id}`)).data;

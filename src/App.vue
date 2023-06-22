@@ -1,16 +1,27 @@
 <template>  
   
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-     <router-link to="/condutor/listar">Condutor</router-link> 
-  </nav>
+<Headers/>
   <router-view/>
-
 </template>
+<script>
+import { defineComponent } from 'vue';
+import Headers from '../src/components/Header.vue';
+
+export default defineComponent({
+  components: {
+    Headers,
+  },
+  setup() {
+    
+  }
+});
+</script>
+
+
 
 
 <style lang="scss">
+
 // Variable overrides first
 $primary: #900;
 $enable-shadows: true;
@@ -24,21 +35,9 @@ $prefix: "mo-";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
-nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #151618;
-   text-decoration: none;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-   
-  }
-}
 </style>

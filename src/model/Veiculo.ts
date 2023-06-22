@@ -1,4 +1,4 @@
-import { TriggerOpTypes } from "vue"
+
 import { AbstractEntity } from "./AbstractEntity"
 import { Cor } from "./Cor"
 import { Modelo } from "./Modelo"

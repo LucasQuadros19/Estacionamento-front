@@ -2,14 +2,23 @@ import axios, { AxiosInstance } from "axios";
 import { Veiculos } from "@/model/Veiculo";
 import { PageRequest } from "@/model/page/page-request";
 import { PageResponse } from "@/model/page/page-response";
+
 export class VeiculosClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8080/api/Veiculos",
+      baseURL: "http://localhost:8081/api/veiculos",
       headers: { "Content-type": "application/json" },
     });
+  }
+
+  public async findByAll(): Promise<Veiculos[]> {
+    try {
+      return (await this.axiosClient.get<Veiculos[]>(`/lista`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
   }
 
   public async findById(id: number): Promise<Veiculos> {
@@ -38,8 +47,9 @@ export class VeiculosClient {
 
   public async desativar(deasativar: Veiculos): Promise<void> {
     try {
-      return (await this.axiosClient.put(`/desativar/${deasativar.id}`, deasativar))
-        .data;
+      return (
+        await this.axiosClient.put(`/desativar/${deasativar.id}`, deasativar)
+      ).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
