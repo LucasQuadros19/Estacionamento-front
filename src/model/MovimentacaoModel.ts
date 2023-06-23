@@ -1,6 +1,6 @@
 import { AbstractEntity } from "./AbstractEntity"
 
-export class Movinentacao extends AbstractEntity{
+export class MovimentacaoModel extends AbstractEntity{
    entrada!:Number
    saida!:Number
    tempoMinutos!:Number

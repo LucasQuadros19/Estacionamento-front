@@ -1,6 +1,6 @@
 import { AbstractEntity } from "./AbstractEntity"
 import { MarcaModel } from "./MarcaModel"
-export class Modelo extends AbstractEntity{
+export class ModeloModel extends AbstractEntity{
     nome!:String
     marca!:MarcaModel
 }

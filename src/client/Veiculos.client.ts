@@ -1,79 +1,55 @@
 import axios, { AxiosInstance } from "axios";
-import { Veiculos } from "@/model/Veiculo";
-import { PageRequest } from "@/model/page/page-request";
-import { PageResponse } from "@/model/page/page-response";
+import {VeiculosModel } from "@/model/VeiculoModel";
 
-export class VeiculosClient {
+class VeiculosClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8081/api/veiculos",
-      headers: { "Content-type": "application/json" },
+      baseURL: 'http://localhost:8081/api/veiculos',
+      headers: { 'Content-type': 'application/json' }
     });
   }
 
-  public async findByAll(): Promise<Veiculos[]> {
+  public async findById(id: number): Promise<VeiculosModel> {
     try {
-      return (await this.axiosClient.get<Veiculos[]>(`/lista`)).data;
+      return (await this.axiosClient.get<VeiculosModel>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async findById(id: number): Promise<Veiculos> {
+  public async listaAll(): Promise<VeiculosModel[]> {
     try {
-      return (await this.axiosClient.get<Veiculos>(`/${id}`)).data;
+      return (await this.axiosClient.get<VeiculosModel[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async cadastrar(cadastrar: Veiculos): Promise<void> {
+  public async cadastrar(cadastro: VeiculosModel): Promise<string> {
     try {
-      return await this.axiosClient.post("/", cadastrar);
+      return (await this.axiosClient.post<string>(`/cadastrar`, cadastro)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async editar(editar: Veiculos): Promise<void> {
+  public async editar(id: number, editar: VeiculosModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${editar.id}`, editar)).data;
+      return (await this.axiosClient.put<string>(`/${id}`, editar)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async desativar(deasativar: Veiculos): Promise<void> {
+  public async excluir(id: number): Promise<string> {
     try {
-      return (
-        await this.axiosClient.put(`/desativar/${deasativar.id}`, deasativar)
-      ).data;
-    } catch (error: any) {
-      return Promise.reject(error.response);
-    }
-  }
-
-  public async findByFiltrosPaginado(
-    pageRequest: PageRequest
-  ): Promise<PageResponse<Veiculos>> {
-    try {
-      let requestPath = "";
-
-      requestPath += `?page=${pageRequest.currentPage}`;
-      requestPath += `&size=${pageRequest.pageSize}`;
-      requestPath += `&sort=${
-        pageRequest.sortField === undefined ? "" : pageRequest.sortField
-      },${pageRequest.direction}`;
-
-      return (
-        await this.axiosClient.get<PageResponse<Veiculos>>(requestPath, {
-          params: { filtros: pageRequest.filter },
-        })
-      ).data;
+      return (await this.axiosClient.delete<string>(`/delete/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 }
+
+export default new VeiculosClient();

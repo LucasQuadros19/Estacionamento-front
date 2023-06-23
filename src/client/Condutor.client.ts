@@ -1,76 +1,55 @@
 import axios, { AxiosInstance } from "axios";
-import { Condutor } from "@/model/CondutorModel";
-import { PageRequest } from "@/model/page/page-request";
-import { PageResponse } from "@/model/page/page-response";
-export class CondutorClient {
+import { CondutorModel } from "@/model/CondutorModel";
+
+class CondutorClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8081/api/condutor",
-      headers: { "Content-type": "application/json" },
+      baseURL: 'http://localhost:8081/api/condutor',
+      headers: { 'Content-type': 'application/json' }
     });
   }
-  public async findByAll(): Promise<Condutor[]> {
+
+  public async findById(id: number): Promise<CondutorModel> {
     try {
-      return (await this.axiosClient.get<Condutor[]>(`/lista`)).data;
-    } catch (error: any) {
-      return Promise.reject(error.response);
-    }
-  }
-  
-  public async findById(id: number): Promise<Condutor> {
-    try {
-      return (await this.axiosClient.get<Condutor>(`/lista/id/${id}`)).data;
+      return (await this.axiosClient.get<CondutorModel>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async cadastrar(condutor: Condutor): Promise<void> {
+  public async listaAll(): Promise<CondutorModel[]> {
     try {
-      return await this.axiosClient.post("/", condutor);
+      return (await this.axiosClient.get<CondutorModel[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async editar(condutor: Condutor): Promise<void> {
+  public async cadastrar(cadastro: CondutorModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${condutor.id}`, condutor)).data;
+      return (await this.axiosClient.post<string>(`/cadastrar`, cadastro)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async desativar(condutor: Condutor): Promise<void> {
+  public async editar(id: number, editar: CondutorModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/desativar/${condutor.id}`, condutor))
-        .data;
+      return (await this.axiosClient.put<string>(`/${id}`, editar)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async findByFiltrosPaginado(
-    pageRequest: PageRequest
-  ): Promise<PageResponse<Condutor>> {
+  public async excluir(id: number): Promise<string> {
     try {
-      let requestPath = "";
-
-      requestPath += `?page=${pageRequest.currentPage}`;
-      requestPath += `&size=${pageRequest.pageSize}`;
-      requestPath += `&sort=${
-        pageRequest.sortField === undefined ? "" : pageRequest.sortField
-      },${pageRequest.direction}`;
-
-      return (
-        await this.axiosClient.get<PageResponse<Condutor>>(requestPath, {
-          params: { filtros: pageRequest.filter },
-        })
-      ).data;
+      return (await this.axiosClient.delete<string>(`/delete/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 }
+
+export default new CondutorClient();

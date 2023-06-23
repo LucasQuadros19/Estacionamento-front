@@ -1,76 +1,55 @@
 import axios, { AxiosInstance } from "axios";
-import { Movinentacao } from "@/model/Movimentacao"; 
-import { PageRequest } from "@/model/page/page-request";
-import { PageResponse } from "@/model/page/page-response";
-export class MovinentacaoClient {
+import {MovimentacaoModel } from "@/model/MovimentacaoModel";
+
+class MovimentacaoClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8081/api/movinentacao",
-      headers: { "Content-type": "application/json" },
+      baseURL: 'http://localhost:8081/api/movinentacao',
+      headers: { 'Content-type': 'application/json' }
     });
   }
-  public async findByAll(): Promise<Movinentacao[]> {
+
+  public async findById(id: number): Promise<MovimentacaoModel> {
     try {
-      return (await this.axiosClient.get<Movinentacao[]>(`/lista`)).data;
+      return (await this.axiosClient.get<MovimentacaoModel>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async findById(id: number): Promise<Movinentacao> {
+  public async listaAll(): Promise<MovimentacaoModel[]> {
     try {
-      return (await this.axiosClient.get<Movinentacao>(`/${id}`)).data;
+      return (await this.axiosClient.get<MovimentacaoModel[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async cadastrar(cadastrar: Movinentacao): Promise<void> {
+  public async cadastrar(cadastro: MovimentacaoModel): Promise<string> {
     try {
-      return await this.axiosClient.post("/", cadastrar);
+      return (await this.axiosClient.post<string>(`/cadastrar`, cadastro)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async editar(editar: Movinentacao): Promise<void> {
+  public async editar(id: number, editar: MovimentacaoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${editar.id}`, editar)).data;
+      return (await this.axiosClient.put<string>(`/${id}`, editar)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async desativar(deasativar: Movinentacao): Promise<void> {
+  public async excluir(id: number): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/desativar/${deasativar.id}`, deasativar))
-        .data;
-    } catch (error: any) {
-      return Promise.reject(error.response);
-    }
-  }
-
-  public async findByFiltrosPaginado(
-    pageRequest: PageRequest
-  ): Promise<PageResponse<Movinentacao>> {
-    try {
-      let requestPath = "";
-
-      requestPath += `?page=${pageRequest.currentPage}`;
-      requestPath += `&size=${pageRequest.pageSize}`;
-      requestPath += `&sort=${
-        pageRequest.sortField === undefined ? "" : pageRequest.sortField
-      },${pageRequest.direction}`;
-
-      return (
-        await this.axiosClient.get<PageResponse<Movinentacao>>(requestPath, {
-          params: { filtros: pageRequest.filter },
-        })
-      ).data;
+      return (await this.axiosClient.delete<string>(`/delete/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 }
+
+export default new MovimentacaoClient();

@@ -1,75 +1,55 @@
 import axios, { AxiosInstance } from "axios";
-import { Configuracao } from "@/model/Configuracao";
-import { PageRequest } from "@/model/page/page-request";
-import { PageResponse } from "@/model/page/page-response";
-export class ConfiguracaoClient {
+import { ConfiguracaoModel } from "@/model/ConfiguracaoModel";
+
+class ConfiguracaoClient {
   private axiosClient: AxiosInstance;
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "http://localhost:8081/api/configuracao",
-      headers: { "Content-type": "application/json" },
+      baseURL: 'http://localhost:8081/api/configuracao',
+      headers: { 'Content-type': 'application/json' }
     });
   }
-  public async findByAll(): Promise<Configuracao[]> {
+
+  public async findById(id: number): Promise<ConfiguracaoModel> {
     try {
-      return (await this.axiosClient.get<Configuracao[]>(`/lista`)).data;
-    } catch (error: any) {
-      return Promise.reject(error.response);
-    }
-  }
-  public async findById(id: number): Promise<Configuracao> {
-    try {
-      return (await this.axiosClient.get<Configuracao>(`/${id}`)).data;
+      return (await this.axiosClient.get<ConfiguracaoModel>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async cadastrar(configuracao: Configuracao): Promise<void> {
+  public async listaAll(): Promise<ConfiguracaoModel[]> {
     try {
-      return await this.axiosClient.post("/", configuracao);
+      return (await this.axiosClient.get<ConfiguracaoModel[]>(`/lista`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async editar(configuracao: Configuracao): Promise<void> {
+  public async cadastrar(cadastro: ConfiguracaoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/${configuracao.id}`, configuracao)).data;
+      return (await this.axiosClient.post<string>(`/cadastrar`, cadastro)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async desativar(configuracao: Configuracao): Promise<void> {
+  public async editar(id: number, editar: ConfiguracaoModel): Promise<string> {
     try {
-      return (await this.axiosClient.put(`/desativar/${configuracao.id}`, configuracao))
-        .data;
+      return (await this.axiosClient.put<string>(`/${id}`, editar)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 
-  public async findByFiltrosPaginado(
-    pageRequest: PageRequest
-  ): Promise<PageResponse<Configuracao>> {
+  public async excluir(id: number): Promise<string> {
     try {
-      let requestPath = "";
-
-      requestPath += `?page=${pageRequest.currentPage}`;
-      requestPath += `&size=${pageRequest.pageSize}`;
-      requestPath += `&sort=${
-        pageRequest.sortField === undefined ? "" : pageRequest.sortField
-      },${pageRequest.direction}`;
-
-      return (
-        await this.axiosClient.get<PageResponse<Configuracao>>(requestPath, {
-          params: { filtros: pageRequest.filter },
-        })
-      ).data;
+      return (await this.axiosClient.delete<string>(`/delete/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
   }
 }
+
+export default new ConfiguracaoClient();
