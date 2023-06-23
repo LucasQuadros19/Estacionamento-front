@@ -1,5 +1,5 @@
-import { MarcaModel } from "@/model/MarcaModel";
 import axios, { AxiosInstance } from "axios";
+import { MarcaModel } from "@/model/MarcaModel";
 
 class MarcaClient {
   private axiosClient: AxiosInstance;
@@ -13,7 +13,7 @@ class MarcaClient {
 
   public async findById(id: number): Promise<MarcaModel> {
     try {
-      return (await this.axiosClient.get<MarcaModel>(`/${id}`)).data;
+      return (await this.axiosClient.get<MarcaModel>(`/lista/id/${id}`)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
@@ -29,7 +29,7 @@ class MarcaClient {
 
   public async cadastrar(marca: MarcaModel): Promise<string> {
     try {
-      return (await this.axiosClient.post<string>('/cadastrar', marca)).data;
+      return (await this.axiosClient.post<string>(`/cadastrar`, marca)).data;
     } catch (error: any) {
       return Promise.reject(error.response);
     }
@@ -42,7 +42,6 @@ class MarcaClient {
       return Promise.reject(error.response);
     }
   }
-  
 
   public async excluir(id: number): Promise<string> {
     try {

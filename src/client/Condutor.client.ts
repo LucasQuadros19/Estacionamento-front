@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { Condutor } from "@/model/Condutor";
+import { Condutor } from "@/model/CondutorModel";
 import { PageRequest } from "@/model/page/page-request";
 import { PageResponse } from "@/model/page/page-response";
 export class CondutorClient {
