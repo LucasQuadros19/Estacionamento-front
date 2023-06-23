@@ -42,6 +42,14 @@ class MovimentacaoClient {
       return Promise.reject(error.response);
     }
   }
+  public async sair(id: number): Promise<any> {
+    try {
+      return (await this.axiosClient.put(`/sair/${id}`)).data;
+    } catch (error: any) {
+      return Promise.reject(error.response);
+    }
+  }
+  
 
   public async excluir(id: number): Promise<string> {
     try {
