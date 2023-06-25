@@ -28,20 +28,20 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" to="/">Home</router-link>
-          <router-link class="nav-link" to="/Marca/lista">Marca</router-link>
-          <router-link class="nav-link" to="/Modelo/listar">Modelo</router-link>
+          <router-link class="nav-link" to="/marca/lista">Marca</router-link>
+          <router-link class="nav-link" to="/modelo/listar">Modelo</router-link>
           <router-link class="nav-link" to="/condutor/listar"
             >Condutor</router-link
           >
           <router-link class="nav-link" to="/veiculo/listar"
             >Veiculo</router-link
           >
-          <router-link class="nav-link" to="/Movimentacao/listar"
+          <router-link class="nav-link" to="/movimentacao/listar"
             >Movimentacao</router-link
           >
         </div>
         <div class="navbar-nav ms-auto">
-          <router-link class="nav-link" to="/Configuracao/listar"
+          <router-link class="nav-link" to="/configuracao/listar"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
