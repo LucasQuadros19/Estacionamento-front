@@ -20,7 +20,12 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Ativo</th>
-              <th scope="col" class="text-start">Marca</th>
+              <th scope="col" class="text-start">condutor</th>
+              <th scope="col" class="text-end">placa</th>
+              <th scope="col" class="text-start">cor</th>
+              <th scope="col" class="text-start">modelo</th>
+              <th scope="col" class="text-start">tipo</th>
+              <th scope="col" class="text-end">ano</th>
               <th scope="col">Opção</th>
             </tr>
           </thead>  

@@ -20,7 +20,9 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Ativo</th>
-              <th scope="col" class="text-start">Marca</th>
+              <th scope="col" class="text-start">Nome</th>
+              <th scope="col" class="text-end">Cpf</th>
+              <th scope="col" class="text-end">Telefone</th>
               <th scope="col">Opção</th>
             </tr>
           </thead>  
@@ -33,6 +35,8 @@
                 <span v-if="!item.ativo" class="badge text-bg-danger"> Inativo </span>
               </th>
               <th class="text-start">{{ item.nome }}</th>
+              <th class="text-end">{{ item.cpf }}</th>
+              <th class="text-end">{{ item.telefone }}</th>
               <th class="col-md-2">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                   <router-link type="button" class="btn btn-sm btn-warning" 
