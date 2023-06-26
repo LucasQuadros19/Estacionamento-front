@@ -7,7 +7,7 @@
       <div class="col-md-2"> 
         <div class="d-grid gap-2">
           <router-link type="button" class="btn btn-success" 
-            to="/marca/formulario">Cadastrar
+            to="/veiculo/formulario">Cadastrar
           </router-link>
         </div>
       </div>
@@ -20,7 +20,6 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Ativo</th>
-              <th scope="col" class="text-start">condutor</th>
               <th scope="col" class="text-end">placa</th>
               <th scope="col" class="text-start">cor</th>
               <th scope="col" class="text-start">modelo</th>
@@ -37,15 +36,19 @@
                 <span v-if="item.ativo" class="badge text-bg-success"> Ativo </span>
                 <span v-if="!item.ativo" class="badge text-bg-danger"> Inativo </span>
               </th>
-              <th class="text-start">{{ item.nome }}</th>
+              <th class="text-end">{{ item.placa }}</th>
+              <th class="text-start">{{ item.cor }}</th>
+              <th class="text-start">{{ item.modelo.nome }}</th>
+              <th class="text-start">{{ item.tipo }}</th>
+              <th class="text-end">{{ item.ano }}</th>
               <th class="col-md-2">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                   <router-link type="button" class="btn btn-sm btn-warning" 
-                      :to="{ name: 'marca-formulario-editar-view', query: { id: item.id, form: 'editar' } } "> 
+                      :to="{ name: 'veiculo-formulario-editar-view', query: { id: item.id, form: 'editar' } } "> 
                     Editar
                   </router-link>
                   <router-link type="button" class="btn btn-sm btn-danger" 
-                      :to="{ name: 'marca-formulario-excluir-view', query: { id: item.id, form: 'excluir' } } ">
+                      :to="{ name: 'veiculo-formulario-excluir-view', query: { id: item.id, form: 'excluir' } } ">
                     Excluir
                   </router-link>
                 </div>

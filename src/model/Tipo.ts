@@ -1,3 +1,3 @@
 export enum Tipo{
-    CARRO, MOTO, CAMINHAO
+    Carro,Vam,Moto
 }

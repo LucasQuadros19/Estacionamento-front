@@ -6,7 +6,7 @@ class VeiculosClient {
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: 'http://localhost:8081/api/veiculos',
+      baseURL: 'http://localhost:8081/api/veiculo',
       headers: { 'Content-type': 'application/json' }
     });
   }
@@ -19,7 +19,7 @@ class VeiculosClient {
     }
   }
 
-  public async listaAll(): Promise<VeiculosModel[]> {
+  public async listaAll(): Promise<any> {
     try {
       return (await this.axiosClient.get<VeiculosModel[]>(`/lista`)).data;
     } catch (error: any) {

@@ -1,3 +1,3 @@
 export enum Cor{
-    AMARELO, VERMELHO, AZUL, BRANCO
+    Azul,Vermelho,Preto,Branco
 }
