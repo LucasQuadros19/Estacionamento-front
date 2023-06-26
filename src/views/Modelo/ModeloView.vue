@@ -7,7 +7,7 @@
         <div class="col-md-2"> 
           <div class="d-grid gap-2">
             <router-link type="button" class="btn btn-success" 
-              to="/marca/formulario">Cadastrar
+              to="/modelo/formulario">Cadastrar
             </router-link>
           </div>
         </div>
@@ -38,11 +38,11 @@
                 <th class="col-md-2">
                   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <router-link type="button" class="btn btn-sm btn-warning" 
-                        :to="{ name: 'marca-formulario-editar-view', query: { id: item.id, form: 'editar' } } "> 
+                        :to="{ name: 'modelo-formulario-editar-view', query: { id: item.id, form: 'editar' } } "> 
                       Editar 
                     </router-link>
                     <router-link type="button" class="btn btn-sm btn-danger" 
-                        :to="{ name: 'marca-formulario-excluir-view', query: { id: item.id, form: 'excluir' } } ">
+                        :to="{ name: 'modelo-formulario-excluir-view', query: { id: item.id, form: 'excluir' } } ">
                       Excluir
                     </router-link>
                   </div>

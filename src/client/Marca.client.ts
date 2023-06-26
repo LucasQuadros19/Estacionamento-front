@@ -19,7 +19,7 @@ class MarcaClient {
     }
   }
 
-  public async listaAll(): Promise<MarcaModel[]> {
+  public async listaAll(): Promise<any> {
     try {
       return (await this.axiosClient.get<MarcaModel[]>(`/lista`)).data;
     } catch (error: any) {
