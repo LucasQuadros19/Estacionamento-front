@@ -71,7 +71,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoFormView.vue')
       },
       {
-        path: '/veimovimentacaoculo/formulario',
+        path: '/movimentacao/formulario',
         name: 'movimentacao-formulario-excluir-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoFormView.vue')
       }

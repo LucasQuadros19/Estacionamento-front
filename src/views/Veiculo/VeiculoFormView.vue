@@ -28,11 +28,12 @@
         <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="veiculo.nome">
         <label class="form-label">Placa *</label>
         <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="veiculo.placa">
+        
         <label class="form-label">Modelo *</label>
         <select class="form-select" v-model="veiculo.modelo">
           <option v-for="item in List" :key="item.id" :value="item">{{item.nome+"-"+item.marca.nome}}</option>
-        </select>
-        <label class="form-label">Cor *</label>
+          </select>
+        <label class="form-label">Cor *</label> 
         <select class="form-select" v-model="veiculo.cor">
           <option v-for="cor in cores" :key="cor" :value="cor">{{ cor }}</option>
         </select>

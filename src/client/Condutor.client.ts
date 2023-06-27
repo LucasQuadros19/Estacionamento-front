@@ -19,7 +19,7 @@ class CondutorClient {
     }
   }
 
-  public async listaAll(): Promise<CondutorModel[]> {
+  public async listaAll(): Promise<any> {
     try {
       return (await this.axiosClient.get<CondutorModel[]>(`/lista`)).data;
     } catch (error: any) {

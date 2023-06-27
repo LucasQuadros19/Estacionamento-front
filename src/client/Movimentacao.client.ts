@@ -6,7 +6,7 @@ class MovimentacaoClient {
 
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: 'http://localhost:8081/api/movinentacao',
+      baseURL: 'http://localhost:8081/api/movimentacao',
       headers: { 'Content-type': 'application/json' }
     });
   }
@@ -19,7 +19,7 @@ class MovimentacaoClient {
     }
   }
 
-  public async listaAll(): Promise<MovimentacaoModel[]> {
+  public async listaAll(): Promise<any> {
     try {
       return (await this.axiosClient.get<MovimentacaoModel[]>(`/lista`)).data;
     } catch (error: any) {
