@@ -19,7 +19,7 @@ class ConfiguracaoClient {
     }
   }
 
-  public async listaAll(): Promise<ConfiguracaoModel[]> {
+  public async listaAll(): Promise<any> {
     try {
       return (await this.axiosClient.get<ConfiguracaoModel[]>(`/lista`)).data;
     } catch (error: any) {

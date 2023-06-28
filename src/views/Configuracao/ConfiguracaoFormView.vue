@@ -2,7 +2,7 @@
     <div class="container" style="background:;">
       <div class="row">
         <div class="col-md-10 text-start">
-          <p class="fs-3">Cadastrar de Movimentacoes</p>
+          <p class="fs-3">Cadastrar de configuracao</p>
         </div>
         <div class="col-md-2"></div>
       </div>
@@ -20,15 +20,30 @@
   
       <div class="row">
         <div class="col-md-12 text-start">
-          <label class="form-label">Nome da Marca *</label>
-          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="marca.nome">
+          <label class="form-label">Valor Hora *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.valorHora">
+          <label class="form-label">inicio *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.inicioExpediente">
+          <label class="form-label">Fim *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.fimExpediente">
+          <label class="form-label">Tempo para desconto *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.tempoParaDesconto">
+          <label class="form-label">Tempo de desconto *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.tempoDeDesconto">
+          <label class="form-label">Vaga Moto *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.vagasMoto">
+          <label class="form-label">Vaga Carro *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.vagasCarro">
+          <label class="form-label">Vaga Vam *</label>
+          <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="configuracao.vagasVam">
+       
         </div>
       </div>
   
       <div class="row">
         <div class="col-md-3 offset-md-6">
           <div class="d-grid gap-2">
-            <router-link type="button" class="btn btn-info" to="/marca/lista">Voltar</router-link>
+            <router-link type="button" class="btn btn-info" to="/configuracao/lista">Voltar</router-link>
           </div>
         </div>
         <div class="col-md-3">
@@ -43,15 +58,15 @@
   </template>
   
   <script lang="ts">
-  import MarcaClient from '@/client/Marca.client';
-  import { MarcaModel } from '@/model/MarcaModel';
+  import ConfiguracaoClient from '@/client/Configuracao.client';
+  import { ConfiguracaoModel } from '@/model/ConfiguracaoModel';
   import { defineComponent } from 'vue';
   
   export default defineComponent({
-    name: 'MarcaFormulario',
+    name: 'Formulario',
     data() {
       return {
-        marca: new MarcaModel(),
+        configuracao: new ConfiguracaoModel(),
         mensagem: {
           ativo: false,
           titulo: "",
@@ -76,9 +91,9 @@
     },
     methods: {
       onClickCadastrar() {
-        MarcaClient.cadastrar(this.marca)
+        ConfiguracaoClient.cadastrar(this.configuracao)
           .then(success => {
-            this.marca = new MarcaModel();
+            this.configuracao = new ConfiguracaoModel();
             this.mensagem.ativo = true;
             this.mensagem.mensagem = success;
             this.mensagem.titulo = "Parabéns. ";
@@ -86,28 +101,30 @@
           })
           .catch(error => {
             this.mensagem.ativo = true;
-            this.mensagem.mensagem = error;
             this.mensagem.titulo = "Erro. ";
             this.mensagem.css = "alert alert-danger alert-dismissible fade show";
           });
       },
+
+
+
+      
       findById(id: number) {
-        MarcaClient.findById(id)
+        ConfiguracaoClient.findById(id)
           .then(success => {
-            this.marca = success;
+            this.configuracao = success;
           })
           .catch(error => {
-            this.mensagem.ativo = true;
-            this.mensagem.mensagem = error;
             this.mensagem.titulo = "Erro. ";
             this.mensagem.css = "alert alert-danger alert-dismissible fade show";
           });
+          
       },
       onClickEditar() {
-    if (this.marca.id) {
-      MarcaClient.editar(this.marca.id, this.marca)
+    if (this.configuracao.id) {
+      ConfiguracaoClient.editar(this.configuracao.id, this.configuracao)
         .then(success => {
-          this.marca = new MarcaModel();
+          this.configuracao = new ConfiguracaoModel();
           this.mensagem.ativo = true;
           this.mensagem.mensagem = success;
           this.mensagem.titulo = "Parabéns. ";
@@ -115,29 +132,27 @@
         })
         .catch(error => {
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro. ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     } else {
-      console.error("ID da marca indefinido. Não é possível editar.");
+      console.error("ID da configuracao indefinido. Não é possível editar.");
     }
   },
       onClickExcluir() {
-    if (this.marca.id) {
-      MarcaClient.excluir(this.marca.id)
+    if (this.configuracao.id) {
+      ConfiguracaoClient.excluir(this.configuracao.id)
         .then(success => {
-          this.marca = new MarcaModel();
-          this.$router.push({ name: 'marca-lista-view' });
+          this.configuracao = new ConfiguracaoModel();
+          this.$router.push({ name: 'configuracao-lista-view' });
         })
         .catch(error => {
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = error;
           this.mensagem.titulo = "Erro. ";
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     } else {
-      console.error("ID da marca indefinido. Não é possível excluir.");
+      console.error("ID da configuracao indefinido. Não é possível excluir.");
     }
       }
     }

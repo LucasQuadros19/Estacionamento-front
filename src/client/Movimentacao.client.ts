@@ -50,7 +50,6 @@ class MovimentacaoClient {
     }
   }
   
-
   public async excluir(id: number): Promise<string> {
     try {
       return (await this.axiosClient.delete<string>(`/delete/${id}`)).data;
@@ -58,6 +57,16 @@ class MovimentacaoClient {
       return Promise.reject(error.response);
     }
   }
+  public async listaAllAtivos(id: number): Promise<any> {
+    try {
+        return (await this.axiosClient.get<MovimentacaoModel[]>(`/lista/ativo/true`)).data;
+    } catch (error: any) {
+        return Promise.reject(error.response);
+    }
 }
+
+
+}
+
 
 export default new MovimentacaoClient();

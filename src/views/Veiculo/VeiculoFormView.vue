@@ -24,8 +24,6 @@
           <label class="form-label">Ativo *</label>
           <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="veiculo.ativo">
         </div>
-        <label class="form-label">Nome do Veículo *</label>
-        <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="veiculo.nome">
         <label class="form-label">Placa *</label>
         <input type="text" :disabled="form === 'excluir' ? disabled : false" class="form-control" v-model="veiculo.placa">
         
@@ -117,7 +115,7 @@ export default defineComponent({
         })
         .catch(error => {
           this.mensagem.ativo = true;
-          this.mensagem.mensagem = error;
+          this.mensagem.mensagem = error.data;
           this.mensagem.css = "alert alert-danger alert-dismissible fade show";
         });
     },

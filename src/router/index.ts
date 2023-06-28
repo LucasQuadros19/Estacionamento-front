@@ -75,7 +75,24 @@ const routes: Array<RouteRecordRaw> = [
         name: 'movimentacao-formulario-excluir-view',
         component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoFormView.vue')
       }
+      ,
+      {
+        path: '/movimentacao/formulario',
+        name: 'movimentacao-finalizar-view',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoFormView.vue')
+      }
     ]
+  },
+  {
+    path: '/movimentacao/final',
+    name: 'movimentacao-final-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoFinalizacaoView.vue')
+  }
+  ,
+  {
+    path: '/movimentacao/ativos',
+    name: 'movimentacao-ativos-view',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Movimentacao/MovimentacaoAtivosView.vue')
   }
   ,
   {

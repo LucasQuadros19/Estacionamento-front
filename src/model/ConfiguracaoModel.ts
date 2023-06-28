@@ -12,3 +12,6 @@ export class ConfiguracaoModel extends AbstractEntity{
     vagaCarro!:Number
     vagaVan!:Number
 }
+
+
+

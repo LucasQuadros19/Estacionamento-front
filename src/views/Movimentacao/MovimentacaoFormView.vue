@@ -39,6 +39,7 @@
           <button v-if="form === undefined" type="button" class="btn btn-success" @click="onClickCadastrar()">Cadastrar</button>
           <button v-if="form === 'editar'" type="button" class="btn btn-warning" @click="onClickEditar()">Editar</button>
           <button v-if="form === 'excluir'" type="button" class="btn btn-danger" @click="onClickExcluir()">Excluir</button>
+          <button v-if="form === 'finalizar'" type="button" class="btn btn-secondary" @click="onClickSair()">finalizar</button>
         </div>
       </div>
     </div>
@@ -148,6 +149,25 @@ export default defineComponent({
         console.error("ID da movimentação indefinido. Não é possível excluir.");
       }
     },
+    onClickSair(){
+      if (this.movimentacao.id) {
+        MovimentacaoClient.sair(this.movimentacao.id)
+          .then(success => {
+            this.movimentacao = new MovimentacaoModel();
+            this.$router.push({ name: 'movimentacao-lista-view' });
+          })
+          .catch(error => {
+            this.mensagem.ativo = true;
+            this.mensagem.mensagem = error;
+            this.mensagem.titulo = "Erro. ";
+            this.mensagem.css = "alert alert-danger alert-dismissible fade show";
+          });
+      } else {
+        console.error("ID da movimentação indefinido. Não é possível excluir.");
+      }
+
+    },
+
     Listar() {
       VeiculosClient.listaAll()
         .then(success => {
